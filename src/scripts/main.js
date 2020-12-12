@@ -1,4 +1,4 @@
-firebase.initializeApp(firebaseConfig);
+firebase.initializeApp(firebaseConfig); // firebaseConfig is a variabled declared in "firebaseConfig.js", a gitignored file
 var db = firebase.firestore();
 const sadletId = window.location.search.substr(1);
 
