@@ -26,10 +26,10 @@ window.addEventListener("resize", () => {
   }
 })
 
-function toggleAddMenu() {
-  let menu = document.getElementById("createPostMenu");
+function toggleAddMenu(menuName = "createPostMenu") {
+  let menu = document.getElementById(menuName);
   menu.className = menu.className == "" ? "active" : "";
-  document.getElementById("postTextInput").value = "";
+  if (menuName == "createPostMenu") document.getElementById("postTextInput").value = "";
 }
 
 function showLightbox(image) {

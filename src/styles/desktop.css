@@ -230,3 +230,48 @@ body {
 .hideButton {
     display: none !important;
 }
+
+#createSadletMenu {
+    position: fixed;
+    top: 10vh;
+    right: 0;
+    transition: transform 500ms;
+    transform: translateY(-90px);
+    width: 300px;
+    height: 80px;
+    background-color: var(--bannerBackground);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border-radius: 0 0 0 20px;
+    box-sizing: border-box;
+    padding: 20px 0 20px 20px;
+}
+
+#createSadletMenu input {
+    height: 100%;
+    padding: 8px 0 8px 8px;
+    border-radius: 10px;
+    outline: none;
+    border: none;
+    font-family: Montserrat;
+}
+
+#createSadletMenu button {
+    margin-left: 10px;
+    height: 100%;
+    width: 35px;
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    background-color: var(--bannerButton);
+    color: var(--dark);
+    transition: background-color 250ms;
+    cursor: pointer;
+}
+
+#createSadletMenu.active {
+    transform: none;
+}
+
+#createSadletMenu button:hover {
+    background-color: var(--highlight2);
+}

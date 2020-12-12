@@ -23,7 +23,7 @@
     <div id="header">
         Sadlet
         <button class="darkModeButton" onclick="toggleDarkMode();"><i class="fa fa-lightbulb-o"></i></button>
-        <button id="createSadletButton">Create Sadlet</button>
+        <button id="createSadletButton" onclick="toggleAddMenu('createSadletMenu');">Create Sadlet</button>
     </div>
 
 
@@ -42,6 +42,12 @@
         <div id="status">
             <i class="fa fa-spinner fa-spin" style="font-size: 80px"></i>
         </div>
+    </div>
+
+    <div id="createSadletMenu">
+        <input placeholder="Sadlet Name">
+        <button><i class="fa fa-check"></i></button>
+        <button onclick="document.getElementById('createSadletMenu').className = '';"><i class="fa fa-times"></i></button>
     </div>
 
     <div id="lightbox" onclick="hideLightbox();">
