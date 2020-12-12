@@ -1,0 +1,54 @@
+<html>
+
+<head>
+    <title>Sadlet</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="styles/desktop.css">
+    <link rel="stylesheet" href="styles/mobile.css">
+    <meta name="viewport" content="width=device-width">
+
+    <script src="scripts/firebaseConfig.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-storage.js"></script>
+
+    <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+    <script src="scripts/layout.js"></script>
+
+    <script src="scripts/routes.js"></script>
+    <script src="scripts/main.js"></script>
+</head>
+
+<body>
+    <div id="header">
+        Sadlet
+        <button class="darkModeButton" onclick="toggleDarkMode();"><i class="fa fa-lightbulb-o"></i></button>
+        <button id="createSadletButton">Create Sadlet</button>
+    </div>
+
+
+    <div id="main">
+        <h2 id="sadletName">Sadlet Name Uwu</h2>
+        <div id="posts"></div>
+    </div>
+
+    <div id="floatingButton" onclick="toggleAddMenu();"><span>+</span></div>
+    <div id="createPostMenu">
+        <div id="actualMenu">
+            <span>Add Post</span>
+            <textarea id="postTextInput" placeholder="Text"></textarea>
+            <button onclick="openFileDialog();">Add Image</button><button onclick="createPost();">Post</button>
+        </div>
+        <div id="status">
+            <i class="fa fa-spinner fa-spin" style="font-size: 80px"></i>
+        </div>
+    </div>
+
+    <div id="lightbox" onclick="hideLightbox();">
+        <img id="lightboxImage" src="">
+    </div>
+
+    <input type="file" id="fileUploader" accept=".jpg,.jpeg,.png,.gif,.webp">
+</body>
+
+</html>

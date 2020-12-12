@@ -1,0 +1,21 @@
+/* Small desktop / tablet css overrides */
+@media only screen and (max-width: 1000px) {
+    .post {
+        width: calc(25% - 2vh);
+    }
+    #floatingButton:active {
+        background-color: var(--highlight1);
+        transform: scale(1.2);
+    }
+}
+
+/* Standard mobile css overrides */
+@media only screen and (max-width: 600px) {
+    .post {
+        width: calc(50% - 2vh);
+    }
+    #floatingButton:active {
+        background-color: var(--highlight1);
+        transform: scale(1.2);
+    }
+}

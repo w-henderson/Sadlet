@@ -1,0 +1,225 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap');
+
+body {
+    --highlight1: #ef6461;
+    --highlight2: #e4b363;
+    --lightest: #f0f1f3;
+    --light: #eaebee;
+    --dark: #313638;
+}
+
+body.darkMode {
+    --highlight1: #f38a88 !important;
+    --highlight2: #f0cc93 !important;
+    --lightest: #1c1f20 !important;
+    --light: #313638 !important;
+    --dark: #eaebee !important;
+    background-color: #1c1f20 !important;
+}
+
+::-webkit-scrollbar { background-color: var(--dark) }
+::-webkit-scrollbar-thumb { background-color: var(--highlight2) }
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Montserrat;
+    color: var(--dark);
+}
+
+#header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 10%;
+    background-color: var(--highlight1);
+    font-weight: 800;
+    color: var(--lightest);
+    box-sizing: border-box;
+    padding: 2vh 2vh 2vh 3.5vh;
+    font-size: 5vh;
+    z-index: 2;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+#header button {
+    float: right;
+    outline: none;
+    border: none;
+    background-color: var(--light);
+    height: 100%;
+    font-family: Montserrat;
+    font-size: 2.5vh;
+    transition: background-color 250ms;
+    cursor: pointer;
+    border-radius: 2vh;
+    color: var(--dark);
+    margin-left: 2vh;
+    box-sizing: border-box;
+    padding: 0 2vh;
+}
+
+#header button:hover {
+    background-color: var(--highlight2);
+}
+
+#floatingButton {
+    position: fixed;
+    z-index: 2;
+    bottom: 6vh;
+    right: 6vh;
+    cursor: pointer;
+    user-select: none;
+    width: 8vh;
+    height: 8vh;
+    border-radius: 8vh;
+    background-color: var(--highlight2);
+    display: flex;
+    place-items: center;
+    text-align: center;
+    font-size: 8vh;
+    box-shadow: 4px 4px 10px rgba(0,0,0,0.5);
+    transition: 250ms;
+    outline: none;
+    color: var(--lightest);
+    -webkit-tap-highlight-color: transparent;
+}
+
+#floatingButton:focus { outline: none; }
+#floatingButton span { width: 100%; }
+@media only screen and (min-width: 1000px) {
+    #floatingButton:hover {
+        background-color: var(--highlight1);
+        transform: scale(1.2);
+    }
+}
+
+#main {
+    position: absolute;
+    top: 10%;
+    left: 0;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 2vh 5vh;
+}
+
+.post {
+    height: auto;
+    width: calc(20% - 2vh);
+    background-color: var(--light);
+    box-sizing: border-box;
+    margin: 1vh;
+    padding: 2vh;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+.post span {
+    display: block;
+    width: 100%;
+    font-weight: 600;
+}
+
+.post img {
+    width: calc(100% + 4vh);
+    height: 150px;
+    transform: translate(-2vh, 2vh);
+    object-fit: cover;
+    cursor: zoom-in;
+    border-radius: 0 10px 10px;
+}
+
+#createPostMenu.active {
+    transform: scale(1);
+}
+
+#createPostMenu {
+    position: fixed;
+    bottom: 7vh;
+    right: 7vh;
+    width: 400px;
+    max-width: calc(100% - 15vh);
+    height: 300px;
+    transform-origin: bottom right;
+    transform: scale(0);
+    transition: transform 500ms;
+    background-color: var(--highlight1);
+    border-radius: 4vh;
+    box-sizing: border-box;
+    padding: 15px 20px;
+    font-weight: 800;
+    font-size: 40px;
+    color: var(--lightest);
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    place-content: center;
+}
+
+#createPostMenu textarea {
+    margin: 5px 0;
+    width: 100%;
+    height: 160px;
+    border-radius: 20px;
+    font-family: Montserrat;
+    font-size: 20px;
+    outline: none;
+    border: none;
+    box-sizing: border-box;
+    padding: 10px;
+}
+
+#createPostMenu button {
+    margin-top: 5px;
+    margin-right: 5px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    width: 120px;
+    height: 40px;
+    font-family: Montserrat;
+    transition: 250ms;
+    cursor: pointer;
+    max-width: calc(50% - 10px);
+}
+
+#createPostMenu #status { display: none; }
+#createPostMenu.status #status { display: block; }
+#createPostMenu.status #actualMenu { display: none; }
+
+#createPostMenu button:hover { background-color: var(--highlight2); }
+
+#fileUploader { display: none; }
+
+#lightbox {
+    pointer-events: none;
+    opacity: 0;
+    display: flex;
+    place-content: center;
+    place-items: center;
+    transition: 500ms;
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    cursor: zoom-out;
+}
+
+#lightbox.show {
+    pointer-events: all;
+    opacity: 1;
+}
+
+#lightbox img {
+    max-height: 90vh;
+    max-width: 80vw;
+}
+
+.hideButton {
+    display: none !important;
+}
