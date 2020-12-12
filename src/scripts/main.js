@@ -19,6 +19,9 @@ if (sadletId != "") {
             `<div class='post'><span>${sanitizeHTML(post.title)}</span>${sanitizeHTML(post.body)}</div>`;
         }
       });
+      if (sadletData.contents.length == 0) {
+        document.getElementById("posts").innerText = "Welcome to your new Sadlet! Get started by pressing the plus icon in the bottom write to create a post. Make sure you save the URL to this Sadlet, as you'll need it to get back here.";
+      }
       msnry.reloadItems();
       msnry.layout();
     } else {
@@ -88,4 +91,17 @@ function createPost() {
       window.setTimeout(() => { document.getElementById("createPostMenu").className = "" }, 1000);
     });;
   }
+}
+
+function createSadlet() {
+  let title = document.getElementById("newSadletName").value;
+  if (title == "") return;
+  db.collection("sadlets").add({
+    contents: [],
+    title: title
+  }).then((docRef) => {
+    window.location = "/?" + docRef.id;
+  }).catch(() => {
+    alert("Something went wrong.");
+  })
 }
