@@ -19,3 +19,14 @@
         transform: scale(1.2);
     }
 }
+
+/* Very tiny mobile css overrides, e.g iPhone SE */
+@media only screen and (max-width: 350px) {
+    .post {
+        width: calc(100% - 2vh);
+    }
+    #floatingButton:active {
+        background-color: var(--highlight1);
+        transform: scale(1.2);
+    }
+}

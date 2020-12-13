@@ -93,7 +93,7 @@ body {
 }
 
 #floatingButton:focus { outline: none; }
-#floatingButton span { width: 100%; }
+#floatingButton span { width: 100%; line-height: 100%; }
 @media only screen and (min-width: 1000px) {
     #floatingButton:hover {
         background-color: var(--highlight1);
@@ -240,11 +240,12 @@ body {
     transform: translateY(-12.5vh);
     width: 300px;
     height: 80px;
+    max-height: 10%;
     background-color: var(--bannerBackground);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     border-radius: 0 0 0 20px;
     box-sizing: border-box;
-    padding: 20px;
+    padding: 2.5vh;
     font-size: 5px;
 }
 
@@ -277,4 +278,11 @@ body {
 
 #createSadletMenu button:hover {
     background-color: var(--highlight2);
+}
+
+.headerTitle {
+    -webkit-user-select: none;
+    cursor: pointer;
+    text-decoration: none;
+    color: unset;
 }

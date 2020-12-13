@@ -8,6 +8,8 @@ if (sadletId != "") {
   sadletRef.onSnapshot((doc) => {
     if (doc.exists) {
       var sadletData = doc.data();
+      if (sadletData.readonly) document.getElementById("floatingButton").style.display = "none";
+      else document.getElementById("floatingButton").style.display = "block";
       document.getElementById("sadletName").innerText = sadletData.title;
       document.getElementById("posts").innerHTML = "";
       sadletData.contents.slice().reverse().forEach((post) => {
@@ -22,6 +24,7 @@ if (sadletId != "") {
       if (sadletData.contents.length == 0) {
         document.getElementById("posts").innerText = "Welcome to your new Sadlet! Get started by pressing the plus icon in the bottom write to create a post. Make sure you save the URL to this Sadlet, as you'll need it to get back here.";
       }
+      saveSadlet(sadletId, sadletData.title);
       msnry.reloadItems();
       msnry.layout();
     } else {
@@ -98,10 +101,32 @@ function createSadlet() {
   if (title == "") return;
   db.collection("sadlets").add({
     contents: [],
-    title: title
+    title: title,
+    readonly: false
   }).then((docRef) => {
     window.location = "/?" + docRef.id;
   }).catch(() => {
     alert("Something went wrong.");
   })
+}
+
+function saveSadlet(id, name) {
+  if (id == "tutorial") return;
+  if (!window.localStorage.getItem("mySadlets")) {
+    window.localStorage.setItem("mySadlets", JSON.stringify([
+      { name, id }
+    ]));
+  } else {
+    let currentSadlets = JSON.parse(window.localStorage.getItem("mySadlets"));
+    let alreadySaved = false;
+    currentSadlets.forEach((sadlet) => {
+      if (sadlet.id == id) {
+        alreadySaved = true;
+      }
+    });
+    if (!alreadySaved) {
+      currentSadlets.push({ name, id });
+      window.localStorage.setItem("mySadlets", JSON.stringify(currentSadlets));
+    }
+  }
 }
