@@ -1,6 +1,7 @@
 {
   "name": "Sadlet",
   "short_name": "Sadlet",
+  "description": "An intuitive class participation tool to get everyone engaged.",
   "lang": "en-GB",
   "icons": [
     {
@@ -20,6 +21,6 @@
   "scope": "/",
   "display": "standalone",
   "theme_color": "#ef6461",
-  "background_color": "#ffffff",
+  "background_color": "#313638",
   "orientation": "portrait"
 }
