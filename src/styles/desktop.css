@@ -282,7 +282,14 @@ body {
 
 .headerTitle {
     -webkit-user-select: none;
+    -moz-user-select: none;
     cursor: pointer;
     text-decoration: none;
     color: unset;
+}
+
+.clickable {
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
 }

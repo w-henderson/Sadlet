@@ -17,9 +17,9 @@ function routeHome(goAnyway = false) {
 
     let mySadlets = "";
     JSON.parse(window.localStorage.getItem("mySadlets")).forEach((sadlet) => {
-      mySadlets = `<div class="post" style="cursor:pointer;" onclick="window.location='/?${sadlet.id}';"><span>Anonymous</span>${sadlet.name}</div>` + mySadlets;
+      mySadlets = `<div class="post clickable" onclick="window.location='/?${sadlet.id}';"><span>Anonymous</span>${sadlet.name}</div>` + mySadlets;
     });
-    mySadlets += `<div class="post" style="cursor:pointer;" onclick="window.location='/?tutorial';"><span>Sadlet Developers</span>Tutorial Sadlet</div>`;
+    mySadlets += `<div class="post clickable" onclick="window.location='/?tutorial';"><span>Sadlet Developers</span>Tutorial Sadlet</div>`;
 
     document.getElementById("sadletName").innerText = "Welcome to Sadlet!";
     document.getElementById("posts").innerHTML =
