@@ -133,7 +133,7 @@ body {
     transform: translate(-2vh, 2vh);
     object-fit: cover;
     cursor: zoom-in;
-    border-radius: 0 10px 10px;
+    border-radius: 0 0 10px 10px;
 }
 
 #createPostMenu.active {
