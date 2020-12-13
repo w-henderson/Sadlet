@@ -1,0 +1,25 @@
+{
+  "name": "Sadlet",
+  "short_name": "Sadlet",
+  "lang": "en-GB",
+  "icons": [
+    {
+      "src": "images/icon.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "images/icon-small.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "maskable any"
+    }
+  ],
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "theme_color": "#ef6461",
+  "background_color": "#ffffff",
+  "orientation": "portrait"
+}

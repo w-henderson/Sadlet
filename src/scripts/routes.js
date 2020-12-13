@@ -1,5 +1,14 @@
 function routeHome(goAnyway = false) {
   window.onload = () => {
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('serviceWorker.js', {
+        scope: "/"
+      }).then(function (reg) {
+        console.log("Service worker registered.");
+      }).catch(function (err) {
+        console.log("Service worker not registered. This happened:", err)
+      });
+    }
     if (screen.availHeight / screen.availWidth > 1.88) {
       document.getElementById("createSadletButton").innerHTML = "<i class='fa fa-plus'></i>"
     }
@@ -8,6 +17,7 @@ function routeHome(goAnyway = false) {
     } else {
       if (window.localStorage.getItem("sadletDarkMode") === "true") {
         document.body.className = "darkMode";
+        document.querySelector("meta[name='theme-color']").setAttribute("content", "#313638");
       }
     }
 

@@ -14,6 +14,7 @@ window.onload = () => {
   } else {
     if (window.localStorage.getItem("sadletDarkMode") === "true") {
       document.body.className = "darkMode";
+      document.querySelector("meta[name='theme-color']").setAttribute("content", "#313638");
     }
   }
 }
@@ -46,8 +47,10 @@ function toggleDarkMode() {
   if (window.localStorage.getItem("sadletDarkMode") === "true") {
     window.localStorage.setItem("sadletDarkMode", "false");
     document.body.className = "";
+    document.querySelector("meta[name='theme-color']").setAttribute("content", "#ef6461");
   } else {
     window.localStorage.setItem("sadletDarkMode", "true");
     document.body.className = "darkMode";
+    document.querySelector("meta[name='theme-color']").setAttribute("content", "#313638");
   }
 }
