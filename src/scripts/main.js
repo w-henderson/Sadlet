@@ -69,9 +69,11 @@ function createPost() {
           })
         }).then(() => {
           document.getElementById("status").innerHTML = '<i class="fa fa-check" style="font-size: 80px"></i>';
+          document.getElementById("fileUploader").value = "";
           window.setTimeout(() => { document.getElementById("createPostMenu").className = "" }, 1000);
         }).catch(() => {
           document.getElementById("status").innerHTML = '<i class="fa fa-cross" style="font-size: 80px"></i>';
+          document.getElementById("fileUploader").value = "";
           window.setTimeout(() => { document.getElementById("createPostMenu").className = "" }, 1000);
         });
       });
