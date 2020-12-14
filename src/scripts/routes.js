@@ -9,9 +9,6 @@ function routeHome(goAnyway = false) {
         console.log("Service worker not registered. This happened:", err)
       });
     }
-    if (screen.availHeight / screen.availWidth > 1.88) {
-      document.getElementById("createSadletButton").innerHTML = "<i class='fa fa-plus'></i>"
-    }
     if (!window.localStorage.getItem("sadletDarkMode")) {
       window.localStorage.setItem("sadletDarkMode", "false");
     } else {
@@ -27,15 +24,15 @@ function routeHome(goAnyway = false) {
 
     let mySadlets = "";
     JSON.parse(window.localStorage.getItem("mySadlets")).forEach((sadlet) => {
-      mySadlets = `<div class="post clickable" onclick="window.location='/?${sadlet.id}';"><span>Anonymous</span>${sadlet.name}</div>` + mySadlets;
+      mySadlets = `<div class="post clickable" onclick="window.location='/?${sadlet.id}';"><span>${sadlet.author}</span>${sadlet.name}</div>` + mySadlets;
     });
-    mySadlets += `<div class="post clickable" onclick="window.location='/?tutorial';"><span>Sadlet Developers</span>Tutorial Sadlet</div>`;
+    mySadlets += `<div class="post clickable" onclick="window.location='/?tutorial';"><span>William Henderson</span>Tutorial Sadlet</div>`;
 
     document.getElementById("sadletName").innerText = "Welcome to Sadlet!";
     document.getElementById("posts").innerHTML =
       `Welcome to Sadlet, the intuitive class participation tool that's totally not a rip off of Padlet.\
       If your teacher has invited you to a class, click the link they sent you.\
-      If you want to create your own class, press that 'Create Sadlet' button up in the top right to get started.\
+      If you want to create your own class, press the document icon up in the top right to get started.\
       Happy Sadletting!\
       <h2>My Sadlets (<u style="cursor:pointer;" onclick="window.localStorage.setItem('mySadlets','[]');routeHome(true);">clear</u>)</h2><div class='sadlets'>${mySadlets}</div>`;
     document.getElementById("floatingButton").className = "hideButton";

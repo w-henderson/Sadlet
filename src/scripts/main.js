@@ -1,5 +1,29 @@
 firebase.initializeApp(firebaseConfig); // firebaseConfig is a variabled declared in "firebaseConfig.js", a gitignored file
+
 var db = firebase.firestore();
+var auth = firebase.auth();
+
+var requiresAuth = false;
+var readonly = false;
+
+function updateAuthDisplay(user) {
+  if (user) {
+    document.getElementById("loginIcon").className = "fa fa-user-times loginGreen";
+    document.getElementById("loginIcon").parentNode.onclick = () => { auth.signOut(); };
+    if (!readonly) document.getElementById("floatingButton").style.display = "block";
+    try { document.getElementById("authSpan").innerHTML = "" } catch (_) { };
+  } else {
+    document.getElementById("loginIcon").className = "fa fa-user-plus loginRed";
+    document.getElementById("loginIcon").parentNode.onclick = login;
+    if (requiresAuth) {
+      document.getElementById("authSpan").innerHTML = "This Sadlet requires you to be logged in to post. Please press the button in the top right to authenticate.<br><br>";
+      document.getElementById("floatingButton").style.display = "none";
+    }
+  }
+}
+
+auth.onAuthStateChanged(updateAuthDisplay);
+
 const sadletId = window.location.search.substr(1);
 
 if (sadletId != "") {
@@ -8,8 +32,11 @@ if (sadletId != "") {
   sadletRef.onSnapshot((doc) => {
     if (doc.exists) {
       var sadletData = doc.data();
-      if (sadletData.readonly) document.getElementById("floatingButton").style.display = "none";
+      readonly = sadletData.readonly;
+      if (sadletData.readonly || (sadletData.authRequired && !auth.currentUser)) document.getElementById("floatingButton").style.display = "none";
       else document.getElementById("floatingButton").style.display = "block";
+      requiresAuth = sadletData.authRequired;
+      updateAuthDisplay(auth.currentUser);
       document.getElementById("sadletName").innerText = sadletData.title;
       document.getElementById("posts").innerHTML = "";
       sadletData.contents.slice().reverse().forEach((post) => {
@@ -24,7 +51,7 @@ if (sadletId != "") {
       if (sadletData.contents.length == 0) {
         document.getElementById("posts").innerText = "Welcome to your new Sadlet! Get started by pressing the plus icon in the bottom right to create a post. Make sure you save the URL to this Sadlet, as you'll need it to get back here.";
       }
-      saveSadlet(sadletId, sadletData.title);
+      saveSadlet(sadletId, sadletData.title, sadletData.author);
       msnry.reloadItems();
       msnry.layout();
     } else {
@@ -63,7 +90,7 @@ function createPost() {
       snapshot.ref.getDownloadURL().then((url) => {
         sadletRef.update({
           contents: firebase.firestore.FieldValue.arrayUnion({
-            title: "Anonymous",
+            title: auth.currentUser == undefined ? "Anonymous" : auth.currentUser.displayName,
             body: text,
             image: url
           })
@@ -84,7 +111,7 @@ function createPost() {
   } else {
     sadletRef.update({
       contents: firebase.firestore.FieldValue.arrayUnion({
-        title: "Anonymous",
+        title: auth.currentUser == undefined ? "Anonymous" : auth.currentUser.displayName,
         body: text,
         image: ""
       })
@@ -100,11 +127,15 @@ function createPost() {
 
 function createSadlet() {
   let title = document.getElementById("newSadletName").value;
+  let authRequired = document.getElementById("authCheckbox").checked;
+
   if (title == "") return;
   db.collection("sadlets").add({
     contents: [],
     title: title,
-    readonly: false
+    readonly: false,
+    authRequired: authRequired,
+    author: auth.currentUser == undefined ? "Anonymous" : auth.currentUser.displayName
   }).then((docRef) => {
     window.location = "/?" + docRef.id;
   }).catch(() => {
@@ -112,11 +143,11 @@ function createSadlet() {
   })
 }
 
-function saveSadlet(id, name) {
+function saveSadlet(id, name, author) {
   if (id == "tutorial") return;
   if (!window.localStorage.getItem("mySadlets")) {
     window.localStorage.setItem("mySadlets", JSON.stringify([
-      { name, id }
+      { name, id, author }
     ]));
   } else {
     let currentSadlets = JSON.parse(window.localStorage.getItem("mySadlets"));
@@ -127,7 +158,7 @@ function saveSadlet(id, name) {
       }
     });
     if (!alreadySaved) {
-      currentSadlets.push({ name, id });
+      currentSadlets.push({ name, id, author });
       window.localStorage.setItem("mySadlets", JSON.stringify(currentSadlets));
     }
   }

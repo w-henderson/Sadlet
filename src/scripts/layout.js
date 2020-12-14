@@ -6,9 +6,6 @@ window.onload = () => {
     itemSelector: '.post',
     percentPosition: true
   });
-  if (screen.availHeight / screen.availWidth > 1.88) {
-    document.getElementById("createSadletButton").innerHTML = "<i class='fa fa-plus'></i>"
-  }
   if (!window.localStorage.getItem("sadletDarkMode")) {
     window.localStorage.setItem("sadletDarkMode", "false");
   } else {
@@ -18,14 +15,6 @@ window.onload = () => {
     }
   }
 }
-
-window.addEventListener("resize", () => {
-  if (screen.availHeight / screen.availWidth > 1.88) {
-    document.getElementById("createSadletButton").innerHTML = "<i class='fa fa-plus'></i>"
-  } else {
-    document.getElementById("createSadletButton").innerHTML = "Create Sadlet";
-  }
-})
 
 function toggleAddMenu(menuName = "createPostMenu") {
   let menu = document.getElementById(menuName);

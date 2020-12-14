@@ -19,12 +19,14 @@
     <script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-auth.js"></script>
 
     <!-- Masonry -->
     <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
     <script src="scripts/layout.js"></script>
 
     <!-- Scripts -->
+    <script src="scripts/auth.js"></script>
     <script src="scripts/routes.js"></script>
     <script src="scripts/main.js"></script>
 </head>
@@ -32,13 +34,15 @@
 <body>
     <div id="header">
         <a href="/" class="headerTitle">Sadlet</a>
-        <button class="darkModeButton" onclick="toggleDarkMode();"><i class="fa fa-lightbulb-o"></i></button>
-        <button id="createSadletButton" onclick="toggleAddMenu('createSadletMenu');">Create Sadlet</button>
+        <button onclick="login();"><i id="loginIcon" class="fa fa-user-plus loginRed"></i></button>
+        <button onclick="toggleDarkMode();"><i class="fa fa-lightbulb-o"></i></button>
+        <button id="createSadletButton" onclick="toggleAddMenu('createSadletMenu');"><i class="fa fa-file-text-o"></i></button>
     </div>
 
 
     <div id="main">
         <h2 id="sadletName">Loading Sadlet...</h2>
+        <span id="authSpan"></span>
         <div id="posts"></div>
     </div>
 
@@ -55,9 +59,14 @@
     </div>
 
     <div id="createSadletMenu">
-        <input id="newSadletName" placeholder="Sadlet Name">
-        <button onclick="createSadlet();"><i class="fa fa-check"></i></button>
-        <button onclick="document.getElementById('createSadletMenu').className = '';"><i class="fa fa-times"></i></button>
+        <div class="csmSection">
+            <input id="newSadletName" placeholder="New Sadlet Name">
+            <button onclick="createSadlet();"><i class="fa fa-check"></i></button>
+            <button onclick="document.getElementById('createSadletMenu').className = '';"><i class="fa fa-times"></i></button>
+        </div>
+        <div class="csmSection">
+            <input type="checkbox" id="authCheckbox"><span>Require authentication to post</span>
+        </div>
     </div>
 
     <div id="lightbox" onclick="hideLightbox();">
