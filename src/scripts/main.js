@@ -22,7 +22,7 @@ if (sadletId != "") {
         }
       });
       if (sadletData.contents.length == 0) {
-        document.getElementById("posts").innerText = "Welcome to your new Sadlet! Get started by pressing the plus icon in the bottom write to create a post. Make sure you save the URL to this Sadlet, as you'll need it to get back here.";
+        document.getElementById("posts").innerText = "Welcome to your new Sadlet! Get started by pressing the plus icon in the bottom right to create a post. Make sure you save the URL to this Sadlet, as you'll need it to get back here.";
       }
       saveSadlet(sadletId, sadletData.title);
       msnry.reloadItems();
