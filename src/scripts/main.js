@@ -81,6 +81,8 @@ function createPost() {
   let file = document.getElementById("fileUploader").files[0];
   let text = document.getElementById("postTextInput").value;
 
+  if (file == undefined && text == "") return;
+
   document.getElementById("createPostMenu").className = "active status";
   document.getElementById("status").innerHTML = '<i class="fa fa-spinner fa-spin" style="font-size: 80px"></i>';
 
@@ -163,3 +165,9 @@ function saveSadlet(id, name, author) {
     }
   }
 }
+
+// allow pasting into image upload
+window.addEventListener('paste', e => {
+  document.getElementById("fileUploader").files = e.clipboardData.files;
+  createPost();
+});
