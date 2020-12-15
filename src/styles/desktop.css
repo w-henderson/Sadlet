@@ -309,3 +309,8 @@ body {
 
 .loginRed { color: #7e1e1d; }
 .loginGreen { color: #226b18; }
+#loginButton img {
+    height: 75%;
+    margin: 0 -1vh;
+    border-radius: 100%;
+}

@@ -8,13 +8,19 @@ var readonly = false;
 
 function updateAuthDisplay(user) {
   if (user) {
-    document.getElementById("loginIcon").className = "fa fa-user-times loginGreen";
-    document.getElementById("loginIcon").parentNode.onclick = () => { auth.signOut(); };
-    if (!readonly) document.getElementById("floatingButton").style.display = "block";
+    try {
+      document.getElementById("loginButton").innerHTML = `<img src="${user.photoURL}">`;
+      document.getElementById("loginButton").onclick = () => { auth.signOut(); };
+      if (!readonly) document.getElementById("floatingButton").style.display = "block";
+    } catch (_) {
+      window.setTimeout((user) => {
+        updateAuthDisplay(user);
+      }, 500);
+    }
     try { document.getElementById("authSpan").innerHTML = "" } catch (_) { };
   } else {
-    document.getElementById("loginIcon").className = "fa fa-user-plus loginRed";
-    document.getElementById("loginIcon").parentNode.onclick = login;
+    document.getElementById("loginButton").innerHTML = "<i class='fa fa-user-plus loginRed'></i>";
+    document.getElementById("loginButton").onclick = login;
     if (requiresAuth) {
       document.getElementById("authSpan").innerHTML = "This Sadlet requires you to be logged in to post. Please press the button in the top right to authenticate.<br><br>";
       document.getElementById("floatingButton").style.display = "none";
